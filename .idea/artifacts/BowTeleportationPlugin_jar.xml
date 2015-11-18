@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="BowTeleportationPlugin:jar">
+    <output-path>$USER_HOME$/Desktop/Server/plugins</output-path>
+    <root id="archive" name="BowTeleportationPlugin.jar">
+      <element id="module-output" name="BowTeleportationPlugin" />
+    </root>
+  </artifact>
+</component>

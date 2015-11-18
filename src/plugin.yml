@@ -1,0 +1,8 @@
+name: BowTeleportationPlugin
+version: 1.0
+author: Lightcab
+main: me.lightcab.BowTeleportationMain
+commands:
+  bowtp:
+   usage: /<command>
+   description: Enable or disable bow teleportation!
