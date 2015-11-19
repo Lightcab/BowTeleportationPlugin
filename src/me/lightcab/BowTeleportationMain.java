@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BowTeleportationMain extends JavaPlugin {
-    public List<String> bowtpPlayers = new ArrayList<>();
+    protected Set<UUID> bowtpPlayers = new HashSet<>();
+    protected static BowTeleportationMain instance;
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new BowTeleportationListener(this), this);
+        instance = this;
+        getServer().getPluginManager().registerEvents(new BowTeleportationListener(), this);
         getLogger().info("The plugin has been enabled!");
     }
 
@@ -25,14 +27,15 @@ public class BowTeleportationMain extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        Player player = (Player) sender;
         if (cmd.getName().equalsIgnoreCase("bowtp")) {
             if (sender instanceof Player) {
-                if (bowtpPlayers.contains(player.getName())) {
-                    bowtpPlayers.remove(player.getName());
+                Player player = (Player) sender;
+                UUID uuid = player.getUUID();
+                if (bowtpPlayers.contains(uuid)) {
+                    bowtpPlayers.remove(uuid);
                     player.sendMessage(ChatColor.GREEN + "Server> " + ChatColor.WHITE + "Bow Teleportation has been disabled!");
-                } else if (!bowtpPlayers.contains(player.getName())) {
-                    bowtpPlayers.add(player.getName());
+                } else if (!bowtpPlayers.contains(uuid)) {
+                    bowtpPlayers.add(uuid);
                     player.sendMessage(ChatColor.GREEN + "Server> " + ChatColor.WHITE + "Bow Teleportation has been enabled!");
                 }
                return true;

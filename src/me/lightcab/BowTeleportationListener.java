@@ -9,20 +9,15 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class BowTeleportationListener implements Listener {
 
-    BowTeleportationMain plugin;
-
-    public BowTeleportationListener(BowTeleportationMain instance) {
-        this.plugin = instance;
-    }
+    BowTeleportationMain plugin = BowTeleportationMain.instance;
 
     @EventHandler
-    public void onProjectileHitEvent(ProjectileHitEvent e) {
-        Player p = (Player) e.getEntity().getShooter();
-        Entity entity = e.getEntity();
-        if (plugin.bowtpPlayers.contains(p.getName())) {
-            if (entity instanceof Arrow) {
-                p.teleport(entity.getLocation());
-            }
+    public void onProjectileHitEvent(ProjectileHitEvent event) {
+        Entity entity = event.getEntity();
+        ProjectileSource shooter = entity.getShooter();
+        if (shooter instanceof Player && entity instanceof Arrow) {
+            Player player = (Player) shooter;
+            if (plugin.bowtpPlayers.contains(player.getUUID()) player.teleport(entity.getLocation());
         }
     }
 }
