@@ -17,7 +17,8 @@ public class BowTeleportationListener implements Listener {
         ProjectileSource shooter = entity.getShooter();
         if (shooter instanceof Player && entity instanceof Arrow) {
             Player player = (Player) shooter;
-            if (plugin.bowtpPlayers.contains(player.getUUID()) player.teleport(entity.getLocation());
+            if (plugin.bowtpPlayers.contains(player.getUniqueId())){
+              player.teleport(entity.getLocation());
         }
     }
 }
